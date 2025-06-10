@@ -53,7 +53,11 @@ const RSVPData = async () => {
                                 </div>
                                 <div>
                                     <Drawer>
-                                        <DrawerTrigger>View Attendees</DrawerTrigger>
+                                        <DrawerTrigger>
+                                            <Button variant="secondary" className="w-full mt-4">
+                                                View Attendees
+                                            </Button>
+                                        </DrawerTrigger>
                                         <DrawerContent
                                             className='h-[400px] flex flex-col items-center justify-center'
                                         >
