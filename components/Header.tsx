@@ -4,7 +4,7 @@ import React from 'react'
 const Header = () => {
     return (
         <div
-            className='flex items-center w-[50%] justify-around'
+            className='flex items-center w-[70%] justify-center gap-x-8'
         >
             <Image
                 src="/logo.jpg"
@@ -15,7 +15,7 @@ const Header = () => {
             />
             <Image
                 src="/logo.png"
-                alt="Ashara Mubaraka 1447H Relay Center"
+                alt="Shabab Ul Eidiz Zahabi"
                 width={100}
                 height={100}
                 className="mx-auto mb-4 rounded-md"

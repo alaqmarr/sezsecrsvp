@@ -2,6 +2,7 @@ import AllRSVP from '@/components/AllRSVP';
 import Header from '@/components/Header';
 import MarkRSVP from '@/components/MarkRSVP';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 import { format } from 'date-fns';
 
 const Page = async () => {
@@ -35,19 +36,21 @@ const Page = async () => {
     <div className="w-full flex flex-col items-center justify-center">
       <Header />
 
-      <Card className="w-[300px] mt-6">
-        <CardHeader>
+      <Card className="w-[300px] mt-6 stylebg font-bold">
+        <CardHeader
+          className='h-[30px]'
+        >
           {data.date ? (
-            <div className="flex items-center justify-between">
-              <span>{format(new Date(data.date), 'MMMM dd, yyyy')}</span>
-            </div>
+            <p
+            className='font-bold uppercase text-center text-2xl'
+            >
+              {format(new Date(data.date), 'MMMM dd, yyyy')}
+            </p>
           ) : (
-            <div className="flex items-center justify-between">
-              <span className="text-red-500">No RSVP date available</span>
-            </div>
+            <span className="text-red-500">No RSVP date available</span>
           )}
         </CardHeader>
-
+        <Separator className='border-black bg-black' />
         <CardContent>
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
@@ -60,13 +63,15 @@ const Page = async () => {
             </div>
           </div>
         </CardContent>
-
-        <CardFooter>
+        <Separator className='border-black bg-black' />
+        <CardFooter
+          className='h-[20px]'
+        >
           <MarkRSVP rsvpId={data.id} />
         </CardFooter>
       </Card>
 
-      <AllRSVP/>
+      <AllRSVP />
     </div>
   );
 };

@@ -123,6 +123,21 @@
   --shadow-2xl: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00);
   --tracking-normal: 0em;
 }
+:root {
+  --vh: 1vh;
+}
+
+.stylebg {
+background-image: url("/bg2.jpg");
+}
+
+.drawer-fixed {
+  height: calc(var(--vh, 1vh) * 100);
+  max-height: calc(var(--vh, 1vh) * 100);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
 
 body{
   background-image: url("/bg.avif");

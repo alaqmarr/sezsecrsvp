@@ -90,8 +90,9 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                     className='flex flex-col items-center justify-center mb-4'
                 >
                     <DrawerHeader>
-                        <DrawerTitle>Mark RSVP</DrawerTitle>
-                        <DrawerDescription>
+                        <DrawerDescription
+                            className='text-xs'
+                        >
                             {deviceId() ? `Device ID: ${deviceId()}` : "No Device ID found"}
                         </DrawerDescription>
                     </DrawerHeader>
@@ -99,7 +100,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                         <CardContent>
                             <Form {...form}
                             >
-                                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-[300px]">
+                                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 w-[300px]">
                                     <FormField
                                         control={form.control}
                                         name="name"
@@ -236,7 +237,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                             </p>
                                         )
                                             :
-                                            <Button type="submit" className='w-full'>Submit</Button>
+                                            <Button type="submit" className='w-full mt-4'>Submit</Button>
                                     }
                                 </form>
                             </Form>
