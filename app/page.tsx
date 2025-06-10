@@ -6,14 +6,14 @@ import { format, formatDate, formatISO } from 'date-fns';
 import React from 'react'
 
 const page = async () => {
-  const res = await fetch("http://localhost:3000/api/v1/get/home", { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/get/home`, { cache: 'no-store' });
   const data = await res.json();
   console.log(data)
   return (
     <div>
-      <Header/>
+      <Header />
       <Card
-      className='w-[400px]'
+        className='w-[400px]'
       >
         <CardHeader>
           {
