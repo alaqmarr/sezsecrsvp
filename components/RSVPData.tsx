@@ -3,6 +3,17 @@ import prisma from '@/lib/db';
 import React from 'react';
 import { Card, CardContent, CardHeader } from './ui/card';
 import { format } from 'date-fns';
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from './ui/drawer';
+import { Button } from './ui/button';
 
 export const revalidate = 1;// Revalidate every 60 seconds
 const RSVPData = async () => {
@@ -39,6 +50,47 @@ const RSVPData = async () => {
                                 <div className="flex items-center justify-between">
                                     <span className="font-medium">Dinner:</span>
                                     <span>{dinnerCount} attending</span>
+                                </div>
+                                <div>
+                                    <Drawer>
+                                        <DrawerTrigger>View Attendees</DrawerTrigger>
+                                        <DrawerContent
+                                            className='h-[400px] flex flex-col items-center justify-center'
+                                        >
+                                            <DrawerHeader>
+                                                <DrawerTitle>Attendees</DrawerTitle>
+                                            </DrawerHeader>
+                                            <div
+                                                className='flex flex-col items-center justify-center'
+                                            >
+                                                <Table
+                                                    className='w-fit'
+                                                >
+                                                    <TableHeader>
+                                                        <TableRow>
+                                                            <TableHead className='w-fit'>S No</TableHead>
+                                                            <TableHead>Name</TableHead>
+                                                        </TableRow>
+                                                    </TableHeader>
+                                                    <TableBody>
+                                                        {
+                                                            rsvp.rsvps?.map((r: RSVP, index: number) => (
+                                                                <TableRow key={r.id}>
+                                                                    <TableCell className="font-medium w-fit">{index + 1}</TableCell>
+                                                                    <TableCell>{r.name}</TableCell>
+                                                                </TableRow>
+                                                            ))
+                                                        }
+                                                    </TableBody>
+                                                </Table>
+                                            </div>
+                                            <DrawerFooter>
+                                                <DrawerClose>
+                                                    <Button variant="outline">Close</Button>
+                                                </DrawerClose>
+                                            </DrawerFooter>
+                                        </DrawerContent>
+                                    </Drawer>
                                 </div>
                             </CardContent>
                         </Card>
