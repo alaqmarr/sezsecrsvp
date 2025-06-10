@@ -1,3 +1,4 @@
+import AllRSVP from '@/components/AllRSVP';
 import Header from '@/components/Header';
 import MarkRSVP from '@/components/MarkRSVP';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
@@ -64,6 +65,8 @@ const Page = async () => {
           <MarkRSVP rsvpId={data.id} />
         </CardFooter>
       </Card>
+
+      <AllRSVP/>
     </div>
   );
 };
