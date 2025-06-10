@@ -15,6 +15,7 @@ import {
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from './ui/drawer';
 import { Button } from './ui/button';
 import { CrossIcon, XCircleIcon, XIcon } from 'lucide-react';
+import { Separator } from './ui/separator';
 
 export const revalidate = 1;// Revalidate every 60 seconds
 const RSVPData = async () => {
@@ -34,28 +35,36 @@ const RSVPData = async () => {
                 {rsvps.map((rsvp: any) => {
                     const lunchCount = rsvp.rsvps?.filter((r: RSVP) => r.lunch).length || 0;
                     const dinnerCount = rsvp.rsvps?.filter((r: RSVP) => r.dinner).length || 0;
+                    const lunchthaal = lunchCount / 8;
+                    const dinnerthaal = dinnerCount / 8;
 
                     return (
                         <Card key={rsvp.id} className="shadow-md hover:shadow-lg transition duration-300">
-                            <CardHeader>
+                            <CardHeader
+                            className='h-[20px]'
+                            >
                                 <h2 className="text-lg font-medium text-gray-700">
                                     {format(new Date(rsvp.date), 'MMMM dd, yyyy')}
                                 </h2>
                             </CardHeader>
+                            <Separator/>
 
                             <CardContent className="space-y-2 text-gray-600">
                                 <div className="flex items-center justify-between">
                                     <span className="font-medium">Lunch:</span>
-                                    <span>{lunchCount} attending</span>
+                                    <span>{lunchCount} attending | {lunchthaal} Thaals</span>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span className="font-medium">Dinner:</span>
-                                    <span>{dinnerCount} attending</span>
+                                    <span>{dinnerCount} attending | {dinnerthaal} Thaals</span>
                                 </div>
-                                <div>
+                                <Separator/>
+                                <div
+                                className='flex items-center justify-center w-full'
+                                >
                                     <Drawer>
                                         <DrawerTrigger>
-                                            <Button variant="secondary" className="w-fit mt-4">
+                                            <Button variant="secondary" className="w-fit mt-4 cursor-pointer">
                                                 View Attendees
                                             </Button>
                                         </DrawerTrigger>
