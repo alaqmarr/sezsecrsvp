@@ -6,8 +6,13 @@ import { format } from 'date-fns';
 
 export const revalidate = 1;// Revalidate every 60 seconds
 const RSVPData = async () => {
-    const rsvps = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/get/data`)
-        .then((res) => res.json())
+    const res = await fetch('/api/v1/get/data', {
+        cache: 'no-store', // Disable caching for fresh data
+    });
+    if (!res.ok) {
+        throw new Error('Failed to fetch RSVP data');
+    }
+    const rsvps = await res.json();
 
     return (
         <div className="w-full px-4 py-6">
