@@ -74,6 +74,8 @@ const RSVPData = async () => {
                                                         <TableRow>
                                                             <TableHead className='w-fit'>S No</TableHead>
                                                             <TableHead>Name</TableHead>
+                                                            <TableHead>Lunch</TableHead>
+                                                            <TableHead>Dinner</TableHead>
                                                         </TableRow>
                                                     </TableHeader>
                                                     <TableBody>
@@ -82,6 +84,8 @@ const RSVPData = async () => {
                                                                 <TableRow key={r.id}>
                                                                     <TableCell className="font-medium w-fit">{index + 1}</TableCell>
                                                                     <TableCell>{r.name}</TableCell>
+                                                                    <TableCell>{r.lunch ? 'Yes' : 'No'}</TableCell>
+                                                                    <TableCell>{r.dinner ? 'Yes' : 'No'}</TableCell>
                                                                 </TableRow>
                                                             ))
                                                         }
