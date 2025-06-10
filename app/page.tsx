@@ -18,7 +18,7 @@ const page = async () => {
     <div>
       <Header />
       <Card
-        className='w-[400px]'
+        className='w-[300px]'
       >
         <CardHeader>
           {
