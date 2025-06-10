@@ -19,6 +19,7 @@ model RSVPDay {
   date      DateTime
   lunch     Boolean
   dinner    Boolean
+  active    Boolean  @default(true)
   createdAt DateTime @default(now())
   rsvps     RSVP[]
 }

@@ -14,13 +14,11 @@ export const GET = async (req: Request) => {
   const today = new Date();
   try {
     const rsvp = await prisma.rSVPDay.findFirst({
-      where: {
-        date: {
-          gte: startOfTodayISTinUTC,
-        },
-      },
       orderBy: {
-        date: "asc",
+        date: "desc",
+      },
+      where: {
+        active: true,
       },
       include: {
         rsvps: true,
