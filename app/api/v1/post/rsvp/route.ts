@@ -1,5 +1,4 @@
 import prisma from "@/lib/db";
-import { formatTime } from "@/lib/time";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -8,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const rsvp = await prisma.rSVPDay.create({
       data: {
-        date : date,
+        date: date,
         lunch,
         dinner,
       },

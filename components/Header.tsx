@@ -3,14 +3,24 @@ import React from 'react'
 
 const Header = () => {
     return (
-        <div>
+        <div
+            className='flex items-center w-[50%] justify-around'
+        >
             <Image
                 src="/logo.jpg"
                 alt="Ashara Mubaraka 1447H Relay Center"
-                width={200}
-                height={200}
+                width={100}
+                height={100}
                 className="mx-auto mb-4 rounded-md"
             />
+            <Image
+                src="/logo.png"
+                alt="Ashara Mubaraka 1447H Relay Center"
+                width={100}
+                height={100}
+                className="mx-auto mb-4 rounded-md"
+            />
+
         </div>
     )
 }
