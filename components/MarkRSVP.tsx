@@ -237,7 +237,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                 </FormControl>
                                                 <FormMessage />
                                                 {!lunchAllowed && (
-                                                    <p className="text-red-500 text-xs">
+                                                    <p className="text-red-500 text-xs font-bold">
                                                         Lunch RSVP is closed for today.
                                                     </p>
                                                 )}
@@ -277,8 +277,8 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                 </FormControl>
                                                 <FormMessage />
                                                 {!dinnerAllowed && (
-                                                    <p className="text-red-500 text-xs">
-                                                        Lunch RSVP is closed for today.
+                                                    <p className="text-red-500 text-xs font-bold">
+                                                        Dinner RSVP is closed for today.
                                                     </p>
                                                 )}
                                             </FormItem>
