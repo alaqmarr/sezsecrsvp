@@ -45,13 +45,6 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
     // Set cut-off times for lunch and dinner
     //Lunch is 12:00PM and Dinner is 5:00PM
 
-    const lunchCutoff = new Date();
-    lunchCutoff.setHours(12, 0, 0, 0); // Set to 12:00 PM
-    const dinnerCutoff = new Date();
-    dinnerCutoff.setHours(15, 0, 0, 0); // Set to 5:00 PM
-
-    // Check if the current time is past the cut-off times
-    const currentTime = new Date();
 
 
     const [processing, setProcessing] = useState(false)
@@ -70,34 +63,38 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
         },
     })
 
-useEffect(() => {
-    const checkRSVPDetails = async () => {
-        try {
-            const { data, status } = await axios.get(`/api/v1/get/home`);
+    useEffect(() => {
+        const checkRSVPDetails = async () => {
+            try {
+                const { data, status } = await axios.get(`/api/v1/get/home`);
 
-            if (status === 200) {
-                const now = new Date();
+                if (status === 200) {
+                    const now = new Date();
+                    const lunchCutoff = new Date(data.date);
+                    lunchCutoff.setHours(12, 0, 0, 0); // Set to 12:00 PM
+                    const dinnerCutoff = new Date(data.date);
+                    dinnerCutoff.setHours(15, 0, 0, 0); // Set to 5:00 PM
 
-                if (data.bypassTimes) {
-                    setLunchAllowed(true);
-                    setDinnerAllowed(true);
+                    if (data.bypassTimes) {
+                        setLunchAllowed(true);
+                        setDinnerAllowed(true);
+                    } else {
+                        const lunch = data.lunch && now <= lunchCutoff;
+                        const dinner = data.dinner && now <= dinnerCutoff;
+                        setLunchAllowed(lunch);
+                        setDinnerAllowed(dinner);
+                    }
                 } else {
-                    const lunch = data.lunch && now <= lunchCutoff;
-                    const dinner = data.dinner && now <= dinnerCutoff;
-                    setLunchAllowed(lunch);
-                    setDinnerAllowed(dinner);
+                    toast.error("Failed to fetch RSVP details");
                 }
-            } else {
-                toast.error("Failed to fetch RSVP details");
+            } catch (error: any) {
+                toast.error(error.message || "An error occurred while fetching RSVP details");
+                console.error("Error fetching RSVP details:", error);
             }
-        } catch (error: any) {
-            toast.error(error.message || "An error occurred while fetching RSVP details");
-            console.error("Error fetching RSVP details:", error);
-        }
-    };
+        };
 
-    checkRSVPDetails();
-}, [rsvpId]);
+        checkRSVPDetails();
+    }, [rsvpId]);
 
 
     // 2. Define a submit handler.

@@ -16,6 +16,7 @@ import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, Dr
 import { Button } from './ui/button';
 import { CrossIcon, XCircleIcon, XIcon } from 'lucide-react';
 import { Separator } from './ui/separator';
+import { toZonedTime } from 'date-fns-tz';
 
 export const revalidate = 1;// Revalidate every 60 seconds
 const RSVPData = async () => {
@@ -44,7 +45,10 @@ const RSVPData = async () => {
                             className='h-[20px]'
                             >
                                 <h2 className="text-lg font-medium text-gray-700">
-                                    {format(new Date(rsvp.date), 'MMMM dd, yyyy')}
+                                    {format(
+                                        toZonedTime(new Date(rsvp.date), 'Asia/Kolkata'),
+                                        'PPP'
+                                    )}
                                 </h2>
                             </CardHeader>
                             <Separator/>

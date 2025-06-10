@@ -4,6 +4,7 @@ import MarkRSVP from '@/components/MarkRSVP';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { format } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz';
 
 const Page = async () => {
   let data = null;
@@ -32,6 +33,9 @@ const Page = async () => {
     return <div className="text-red-500">No RSVP data available</div>;
   }
 
+  // Convert UTC date to IST
+  const istDate = data.date ? toZonedTime(new Date(data.date), 'Asia/Kolkata') : null;
+
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <Header />
@@ -40,11 +44,11 @@ const Page = async () => {
         <CardHeader
           className='h-[30px]'
         >
-          {data.date ? (
+          {istDate ? (
             <p
-            className='font-bold uppercase text-center text-2xl'
+              className='font-bold uppercase text-center text-2xl'
             >
-              {format(new Date(data.date), 'MMMM dd, yyyy')}
+              {format(istDate, 'MMMM dd, yyyy')}
             </p>
           ) : (
             <span className="text-red-500">No RSVP date available</span>
