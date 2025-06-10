@@ -63,54 +63,50 @@ const RSVPData = async () => {
                                 className='flex items-center justify-center w-full'
                                 >
                                     <Drawer>
-                                        <DrawerTrigger>
-                                            <Button variant="secondary" className="w-fit mt-4 cursor-pointer">
-                                                View Attendees
-                                            </Button>
-                                        </DrawerTrigger>
-                                        <DrawerContent
-                                            className='h-[400px] flex flex-col items-center justify-center'
-                                        >
-                                            <DrawerHeader>
-                                                <DrawerTitle>Summary</DrawerTitle>
-                                            </DrawerHeader>
-                                            <div
-                                                className='flex flex-col items-center justify-center'
-                                            >
-                                                <Table
-                                                    className='w-fit'
-                                                >
-                                                    <TableHeader>
-                                                        <TableRow>
-                                                            <TableHead className='w-fit'>S No</TableHead>
-                                                            <TableHead>Name</TableHead>
-                                                            <TableHead>Lunch</TableHead>
-                                                            <TableHead>Dinner</TableHead>
-                                                        </TableRow>
-                                                    </TableHeader>
-                                                    <TableBody>
-                                                        {
-                                                            rsvp.rsvps?.map((r: RSVP, index: number) => (
-                                                                <TableRow key={r.id}>
-                                                                    <TableCell className="font-medium w-fit">{index + 1}</TableCell>
-                                                                    <TableCell>{r.name}</TableCell>
-                                                                    <TableCell>{r.lunch ? 'Yes' : 'No'}</TableCell>
-                                                                    <TableCell>{r.dinner ? 'Yes' : 'No'}</TableCell>
-                                                                </TableRow>
-                                                            ))
-                                                        }
-                                                    </TableBody>
-                                                </Table>
-                                            </div>
-                                            <DrawerFooter>
-                                                <DrawerClose>
-                                                    <Button variant="destructive" className="w-fit">
-                                                        <XIcon /> <span>Close</span>
-                                                    </Button>
-                                                </DrawerClose>
-                                            </DrawerFooter>
-                                        </DrawerContent>
-                                    </Drawer>
+  <DrawerTrigger>
+    <Button variant="secondary" className="w-fit mt-4 cursor-pointer">
+      View Attendees
+    </Button>
+  </DrawerTrigger>
+
+  <DrawerContent className="h-[500px] flex flex-col p-4">
+    <DrawerHeader>
+      <DrawerTitle>Summary</DrawerTitle>
+    </DrawerHeader>
+
+    <div className="flex-1 overflow-y-auto mt-2">
+      <Table className="min-w-[500px] w-full">
+        <TableHeader>
+          <TableRow>
+            <TableHead>S No</TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead>Lunch</TableHead>
+            <TableHead>Dinner</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {rsvp.rsvps?.map((r: RSVP, index: number) => (
+            <TableRow key={r.id}>
+              <TableCell className="font-medium">{index + 1}</TableCell>
+              <TableCell>{r.name}</TableCell>
+              <TableCell>{r.lunch ? 'Yes' : 'No'}</TableCell>
+              <TableCell>{r.dinner ? 'Yes' : 'No'}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+
+    <DrawerFooter className="mt-2">
+      <DrawerClose>
+        <Button variant="destructive" className="w-fit">
+          <XIcon /> <span>Close</span>
+        </Button>
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
+
                                 </div>
                             </CardContent>
                         </Card>
