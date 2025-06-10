@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/table"
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from './ui/drawer';
 import { Button } from './ui/button';
+import { CrossIcon, XCircleIcon, XIcon } from 'lucide-react';
 
 export const revalidate = 1;// Revalidate every 60 seconds
 const RSVPData = async () => {
@@ -54,7 +55,7 @@ const RSVPData = async () => {
                                 <div>
                                     <Drawer>
                                         <DrawerTrigger>
-                                            <Button variant="secondary" className="w-full mt-4">
+                                            <Button variant="secondary" className="w-fit mt-4">
                                                 View Attendees
                                             </Button>
                                         </DrawerTrigger>
@@ -94,7 +95,9 @@ const RSVPData = async () => {
                                             </div>
                                             <DrawerFooter>
                                                 <DrawerClose>
-                                                    <Button variant="outline">Close</Button>
+                                                    <Button variant="destructive" className="w-fit">
+                                                        <XIcon /> <span>Close</span>
+                                                    </Button>
                                                 </DrawerClose>
                                             </DrawerFooter>
                                         </DrawerContent>
