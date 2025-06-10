@@ -17,7 +17,14 @@ const page = async () => {
       >
         <CardHeader>
           {
-            format(data.date, 'MMMM dd, yyyy') // Format the date to a readable format
+            data.date ?
+              <div className="flex items-center justify-between">
+                {format(data.date, 'MMMM dd, yyyy')}
+              </div>
+              :
+              <div className="flex items-center justify-between">
+                <span className="text-red-500">No RSVP data available</span>
+              </div>
           }
         </CardHeader>
 
