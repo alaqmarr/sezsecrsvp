@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Drawer,
     DrawerClose,
@@ -39,6 +39,29 @@ const formSchema = z.object({
     dinner: z.boolean()
 })
 const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
+    const [lunchAllowed, setLunchAllowed] = useState(true)
+    const [dinnerAllowed, setDinnerAllowed] = useState(true)
+
+    // Set cut-off times for lunch and dinner
+    //Lunch is 12:00PM and Dinner is 5:00PM
+
+    const lunchCutoff = new Date();
+    lunchCutoff.setHours(12, 0, 0, 0); // Set to 12:00 PM
+    const dinnerCutoff = new Date();
+    dinnerCutoff.setHours(15, 0, 0, 0); // Set to 5:00 PM
+
+    // Check if the current time is past the cut-off times
+    const currentTime = new Date();
+    useEffect(() => {
+        if (currentTime > lunchCutoff) {
+            setLunchAllowed(false);
+        }
+        if (currentTime > dinnerCutoff) {
+            setDinnerAllowed(false);
+        }
+    }
+        , [rsvpId]);
+
 
     const [processing, setProcessing] = useState(false)
 
@@ -56,22 +79,43 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
         },
     })
 
+    useEffect(() => {
+        // check if lunch and dinner are there for the day
+        const rsvpDetails = async () => {
+            try {
+                const response = await axios.get(`/api/v1/get/home`)
+                if (response.status === 200) {
+                    const rsvpData = response.data;
+                    // Check if lunch and dinner are allowed based on the current time
+                    const currentTime = new Date();
+                    setLunchAllowed(rsvpData.lunch)
+                    setDinnerAllowed(rsvpData.dinner)
+                } else {
+                    toast.error("Failed to fetch RSVP details")
+                }
+            } catch (error: any) {
+                toast.error(error.message || "An error occurred while fetching RSVP details")
+                console.error("Error fetching RSVP details:", error)
+            }
+        }
+    }, [rsvpId])
+
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
             setProcessing(true)
             const response = await axios.post(`/api/v1/post/rsvp/${rsvpId}`, values)
             if (response.status === 200) {
-                toast.success("RSVP created successfully!")
+                toast.success("RSVP marked successfully!")
                 form.reset()
                 setProcessing(false)
             } else {
-                toast.error("Failed to create RSVP")
+                toast.error("Failed to mark RSVP")
                 setProcessing(false)
             }
         } catch (error: any) {
-            toast.error(error.message || "An error occurred while creating RSVP")
-            console.error("Error creating RSVP:", error)
+            toast.error(error.message || "An error occurred while marking RSVP")
+            console.error("Error marking RSVP:", error)
             setProcessing(false)
         }
     }
@@ -171,6 +215,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                         onValueChange={(value) => field.onChange(value === "true")}
                                                         value={field.value ? "true" : "false"}
                                                         className="flex flex-row space-x-4"
+                                                        disabled={!lunchAllowed}
                                                     >
                                                         <FormItem className="flex items-center gap-3">
                                                             <FormControl>
@@ -191,6 +236,11 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                     </RadioGroup>
                                                 </FormControl>
                                                 <FormMessage />
+                                                {!lunchAllowed && (
+                                                    <p className="text-red-500 text-xs">
+                                                        Lunch RSVP is closed for today.
+                                                    </p>
+                                                )}
                                             </FormItem>
                                         )}
                                     />
@@ -205,6 +255,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                         onValueChange={(value) => field.onChange(value === "true")}
                                                         value={field.value ? "true" : "false"}
                                                         className="flex flex-row space-x-4"
+                                                        disabled={!dinnerAllowed}
                                                     >
                                                         <FormItem className="flex items-center gap-3">
                                                             <FormControl>
@@ -225,6 +276,11 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                     </RadioGroup>
                                                 </FormControl>
                                                 <FormMessage />
+                                                {!dinnerAllowed && (
+                                                    <p className="text-red-500 text-xs">
+                                                        Lunch RSVP is closed for today.
+                                                    </p>
+                                                )}
                                             </FormItem>
                                         )}
                                     />
