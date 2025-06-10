@@ -62,7 +62,7 @@ const RSVPData = async () => {
                                             className='h-[400px] flex flex-col items-center justify-center'
                                         >
                                             <DrawerHeader>
-                                                <DrawerTitle>Attendees</DrawerTitle>
+                                                <DrawerTitle>Summary</DrawerTitle>
                                             </DrawerHeader>
                                             <div
                                                 className='flex flex-col items-center justify-center'
