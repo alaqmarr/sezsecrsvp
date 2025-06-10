@@ -25,11 +25,11 @@ const page = async () => {
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <span>Lunch</span>
-              <span>{data.lunch ? formatTime(data.lunch) : 'No lunch RSVP'}</span>
+              <span>{data.lunch ? "Lunch at 1PM" : 'No lunch RSVP'}</span>
             </div>
             <div className="flex items-center justify-between">
               <span>Dinner</span>
-              <span>{data.dinner ? formatTime(data.dinner) : 'No dinner RSVP'}</span>
+              <span>{data.dinner ? "Dinner at 7:30PM" : 'No dinner RSVP'}</span>
             </div>
           </div>
         </CardContent>
