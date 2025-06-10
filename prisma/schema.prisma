@@ -15,13 +15,14 @@ datasource db {
 }
 
 model RSVPDay {
-  id        String   @id @default(cuid())
-  date      DateTime
-  lunch     Boolean
-  dinner    Boolean
-  active    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  rsvps     RSVP[]
+  id          String   @id @default(cuid())
+  date        DateTime
+  lunch       Boolean
+  dinner      Boolean
+  active      Boolean  @default(true)
+  bypassTimes Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  rsvps       RSVP[]
 }
 
 model RSVP {

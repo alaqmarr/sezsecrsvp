@@ -1097,6 +1097,7 @@ export namespace Prisma {
     lunch: boolean | null
     dinner: boolean | null
     active: boolean | null
+    bypassTimes: boolean | null
     createdAt: Date | null
   }
 
@@ -1106,6 +1107,7 @@ export namespace Prisma {
     lunch: boolean | null
     dinner: boolean | null
     active: boolean | null
+    bypassTimes: boolean | null
     createdAt: Date | null
   }
 
@@ -1115,6 +1117,7 @@ export namespace Prisma {
     lunch: number
     dinner: number
     active: number
+    bypassTimes: number
     createdAt: number
     _all: number
   }
@@ -1126,6 +1129,7 @@ export namespace Prisma {
     lunch?: true
     dinner?: true
     active?: true
+    bypassTimes?: true
     createdAt?: true
   }
 
@@ -1135,6 +1139,7 @@ export namespace Prisma {
     lunch?: true
     dinner?: true
     active?: true
+    bypassTimes?: true
     createdAt?: true
   }
 
@@ -1144,6 +1149,7 @@ export namespace Prisma {
     lunch?: true
     dinner?: true
     active?: true
+    bypassTimes?: true
     createdAt?: true
     _all?: true
   }
@@ -1226,6 +1232,7 @@ export namespace Prisma {
     lunch: boolean
     dinner: boolean
     active: boolean
+    bypassTimes: boolean
     createdAt: Date
     _count: RSVPDayCountAggregateOutputType | null
     _min: RSVPDayMinAggregateOutputType | null
@@ -1252,6 +1259,7 @@ export namespace Prisma {
     lunch?: boolean
     dinner?: boolean
     active?: boolean
+    bypassTimes?: boolean
     createdAt?: boolean
     rsvps?: boolean | RSVPDay$rsvpsArgs<ExtArgs>
     _count?: boolean | RSVPDayCountOutputTypeDefaultArgs<ExtArgs>
@@ -1263,6 +1271,7 @@ export namespace Prisma {
     lunch?: boolean
     dinner?: boolean
     active?: boolean
+    bypassTimes?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["rSVPDay"]>
 
@@ -1272,6 +1281,7 @@ export namespace Prisma {
     lunch?: boolean
     dinner?: boolean
     active?: boolean
+    bypassTimes?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["rSVPDay"]>
 
@@ -1281,10 +1291,11 @@ export namespace Prisma {
     lunch?: boolean
     dinner?: boolean
     active?: boolean
+    bypassTimes?: boolean
     createdAt?: boolean
   }
 
-  export type RSVPDayOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "lunch" | "dinner" | "active" | "createdAt", ExtArgs["result"]["rSVPDay"]>
+  export type RSVPDayOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "lunch" | "dinner" | "active" | "bypassTimes" | "createdAt", ExtArgs["result"]["rSVPDay"]>
   export type RSVPDayInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     rsvps?: boolean | RSVPDay$rsvpsArgs<ExtArgs>
     _count?: boolean | RSVPDayCountOutputTypeDefaultArgs<ExtArgs>
@@ -1303,6 +1314,7 @@ export namespace Prisma {
       lunch: boolean
       dinner: boolean
       active: boolean
+      bypassTimes: boolean
       createdAt: Date
     }, ExtArgs["result"]["rSVPDay"]>
     composites: {}
@@ -1733,6 +1745,7 @@ export namespace Prisma {
     readonly lunch: FieldRef<"RSVPDay", 'Boolean'>
     readonly dinner: FieldRef<"RSVPDay", 'Boolean'>
     readonly active: FieldRef<"RSVPDay", 'Boolean'>
+    readonly bypassTimes: FieldRef<"RSVPDay", 'Boolean'>
     readonly createdAt: FieldRef<"RSVPDay", 'DateTime'>
   }
     
@@ -4276,6 +4289,7 @@ export namespace Prisma {
     lunch: 'lunch',
     dinner: 'dinner',
     active: 'active',
+    bypassTimes: 'bypassTimes',
     createdAt: 'createdAt'
   };
 
@@ -4389,6 +4403,7 @@ export namespace Prisma {
     lunch?: BoolFilter<"RSVPDay"> | boolean
     dinner?: BoolFilter<"RSVPDay"> | boolean
     active?: BoolFilter<"RSVPDay"> | boolean
+    bypassTimes?: BoolFilter<"RSVPDay"> | boolean
     createdAt?: DateTimeFilter<"RSVPDay"> | Date | string
     rsvps?: RSVPListRelationFilter
   }
@@ -4399,6 +4414,7 @@ export namespace Prisma {
     lunch?: SortOrder
     dinner?: SortOrder
     active?: SortOrder
+    bypassTimes?: SortOrder
     createdAt?: SortOrder
     rsvps?: RSVPOrderByRelationAggregateInput
   }
@@ -4412,6 +4428,7 @@ export namespace Prisma {
     lunch?: BoolFilter<"RSVPDay"> | boolean
     dinner?: BoolFilter<"RSVPDay"> | boolean
     active?: BoolFilter<"RSVPDay"> | boolean
+    bypassTimes?: BoolFilter<"RSVPDay"> | boolean
     createdAt?: DateTimeFilter<"RSVPDay"> | Date | string
     rsvps?: RSVPListRelationFilter
   }, "id">
@@ -4422,6 +4439,7 @@ export namespace Prisma {
     lunch?: SortOrder
     dinner?: SortOrder
     active?: SortOrder
+    bypassTimes?: SortOrder
     createdAt?: SortOrder
     _count?: RSVPDayCountOrderByAggregateInput
     _max?: RSVPDayMaxOrderByAggregateInput
@@ -4437,6 +4455,7 @@ export namespace Prisma {
     lunch?: BoolWithAggregatesFilter<"RSVPDay"> | boolean
     dinner?: BoolWithAggregatesFilter<"RSVPDay"> | boolean
     active?: BoolWithAggregatesFilter<"RSVPDay"> | boolean
+    bypassTimes?: BoolWithAggregatesFilter<"RSVPDay"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"RSVPDay"> | Date | string
   }
 
@@ -4568,6 +4587,7 @@ export namespace Prisma {
     lunch: boolean
     dinner: boolean
     active?: boolean
+    bypassTimes?: boolean
     createdAt?: Date | string
     rsvps?: RSVPCreateNestedManyWithoutRsvpDayInput
   }
@@ -4578,6 +4598,7 @@ export namespace Prisma {
     lunch: boolean
     dinner: boolean
     active?: boolean
+    bypassTimes?: boolean
     createdAt?: Date | string
     rsvps?: RSVPUncheckedCreateNestedManyWithoutRsvpDayInput
   }
@@ -4588,6 +4609,7 @@ export namespace Prisma {
     lunch?: BoolFieldUpdateOperationsInput | boolean
     dinner?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
+    bypassTimes?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rsvps?: RSVPUpdateManyWithoutRsvpDayNestedInput
   }
@@ -4598,6 +4620,7 @@ export namespace Prisma {
     lunch?: BoolFieldUpdateOperationsInput | boolean
     dinner?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
+    bypassTimes?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rsvps?: RSVPUncheckedUpdateManyWithoutRsvpDayNestedInput
   }
@@ -4608,6 +4631,7 @@ export namespace Prisma {
     lunch: boolean
     dinner: boolean
     active?: boolean
+    bypassTimes?: boolean
     createdAt?: Date | string
   }
 
@@ -4617,6 +4641,7 @@ export namespace Prisma {
     lunch?: BoolFieldUpdateOperationsInput | boolean
     dinner?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
+    bypassTimes?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -4626,6 +4651,7 @@ export namespace Prisma {
     lunch?: BoolFieldUpdateOperationsInput | boolean
     dinner?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
+    bypassTimes?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -4808,6 +4834,7 @@ export namespace Prisma {
     lunch?: SortOrder
     dinner?: SortOrder
     active?: SortOrder
+    bypassTimes?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -4817,6 +4844,7 @@ export namespace Prisma {
     lunch?: SortOrder
     dinner?: SortOrder
     active?: SortOrder
+    bypassTimes?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -4826,6 +4854,7 @@ export namespace Prisma {
     lunch?: SortOrder
     dinner?: SortOrder
     active?: SortOrder
+    bypassTimes?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -5151,6 +5180,7 @@ export namespace Prisma {
     lunch: boolean
     dinner: boolean
     active?: boolean
+    bypassTimes?: boolean
     createdAt?: Date | string
   }
 
@@ -5160,6 +5190,7 @@ export namespace Prisma {
     lunch: boolean
     dinner: boolean
     active?: boolean
+    bypassTimes?: boolean
     createdAt?: Date | string
   }
 
@@ -5185,6 +5216,7 @@ export namespace Prisma {
     lunch?: BoolFieldUpdateOperationsInput | boolean
     dinner?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
+    bypassTimes?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -5194,6 +5226,7 @@ export namespace Prisma {
     lunch?: BoolFieldUpdateOperationsInput | boolean
     dinner?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
+    bypassTimes?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

@@ -126,6 +126,7 @@ exports.Prisma.RSVPDayScalarFieldEnum = {
   lunch: 'lunch',
   dinner: 'dinner',
   active: 'active',
+  bypassTimes: 'bypassTimes',
   createdAt: 'createdAt'
 };
 

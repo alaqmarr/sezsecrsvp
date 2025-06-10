@@ -52,15 +52,6 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
 
     // Check if the current time is past the cut-off times
     const currentTime = new Date();
-    useEffect(() => {
-        if (currentTime > lunchCutoff) {
-            setLunchAllowed(false);
-        }
-        if (currentTime > dinnerCutoff) {
-            setDinnerAllowed(false);
-        }
-    }
-        , [rsvpId]);
 
 
     const [processing, setProcessing] = useState(false)
@@ -79,26 +70,35 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
         },
     })
 
-    useEffect(() => {
-        // check if lunch and dinner are there for the day
-        const rsvpDetails = async () => {
-            try {
-                const response = await axios.get(`/api/v1/get/home`)
-                if (response.status === 200) {
-                    const rsvpData = response.data;
-                    // Check if lunch and dinner are allowed based on the current time
-                    const currentTime = new Date();
-                    setLunchAllowed(rsvpData.lunch)
-                    setDinnerAllowed(rsvpData.dinner)
+useEffect(() => {
+    const checkRSVPDetails = async () => {
+        try {
+            const { data, status } = await axios.get(`/api/v1/get/home`);
+
+            if (status === 200) {
+                const now = new Date();
+
+                if (data.bypassTimes) {
+                    setLunchAllowed(true);
+                    setDinnerAllowed(true);
                 } else {
-                    toast.error("Failed to fetch RSVP details")
+                    const lunch = data.lunch && now <= lunchCutoff;
+                    const dinner = data.dinner && now <= dinnerCutoff;
+                    setLunchAllowed(lunch);
+                    setDinnerAllowed(dinner);
                 }
-            } catch (error: any) {
-                toast.error(error.message || "An error occurred while fetching RSVP details")
-                console.error("Error fetching RSVP details:", error)
+            } else {
+                toast.error("Failed to fetch RSVP details");
             }
+        } catch (error: any) {
+            toast.error(error.message || "An error occurred while fetching RSVP details");
+            console.error("Error fetching RSVP details:", error);
         }
-    }, [rsvpId])
+    };
+
+    checkRSVPDetails();
+}, [rsvpId]);
+
 
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {
