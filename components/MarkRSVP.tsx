@@ -107,7 +107,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                             <FormItem>
                                                 <FormLabel>Full Name</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder="Al Aqmar Kanchwala" {...field} className='bg-green-100' />
+                                                    <Input placeholder="ABC XYZ" {...field} className='bg-green-100' />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>

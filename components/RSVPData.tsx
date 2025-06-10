@@ -4,22 +4,17 @@ import React from 'react';
 import { Card, CardContent, CardHeader } from './ui/card';
 import { format } from 'date-fns';
 
+export const revalidate = 1;// Revalidate every 60 seconds
 const RSVPData = async () => {
-    const rsvps = await prisma.rSVPDay.findMany({
-        orderBy: {
-            date: 'desc',
-        },
-        include: {
-            rsvps: true,
-        },
-    });
+    const rsvps = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/get/data`)
+        .then((res) => res.json())
 
     return (
         <div className="w-full px-4 py-6">
             <h1 className="text-2xl font-semibold mb-6 text-center">RSVP Summary</h1>
 
             <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                {rsvps.map((rsvp) => {
+                {rsvps.map((rsvp: any) => {
                     const lunchCount = rsvp.rsvps?.filter((r: RSVP) => r.lunch).length || 0;
                     const dinnerCount = rsvp.rsvps?.filter((r: RSVP) => r.dinner).length || 0;
 
