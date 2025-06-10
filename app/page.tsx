@@ -7,7 +7,12 @@ import React from 'react'
 
 const page = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/get/home`, { cache: 'no-store' });
+  if (!res.ok) {
+    throw new Error('Failed to fetch RSVP data');
+  }
+
   const data = await res.json();
+  if (!data) return <div className="text-red-500">No RSVP data available</div>;
   console.log(data)
   return (
     <div>
