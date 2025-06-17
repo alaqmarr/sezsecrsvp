@@ -162,7 +162,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                             <FormItem>
                                                 <FormLabel>Mobile Number</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder="9632587410" {...field} className='bg-green-100' maxLength={10} minLength={10} />
+                                                    <Input placeholder="WhatsApp Number" {...field} className='bg-green-100' maxLength={10} minLength={10} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -214,7 +214,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                         className="flex flex-row space-x-4"
                                                         disabled={!lunchAllowed}
                                                     >
-                                                        <FormItem className="flex items-center gap-3">
+                                                        <FormItem className="flex items-center gap-3 bg-green-300 p-2 rounded-full">
                                                             <FormControl>
                                                                 <RadioGroupItem value="true" />
                                                             </FormControl>
@@ -222,7 +222,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                                 Yes
                                                             </FormLabel>
                                                         </FormItem>
-                                                        <FormItem className="flex items-center gap-3">
+                                                        <FormItem className="flex items-center gap-3 bg-red-300 p-2 rounded-full">
                                                             <FormControl>
                                                                 <RadioGroupItem value="false" />
                                                             </FormControl>
@@ -235,7 +235,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                 <FormMessage />
                                                 {!lunchAllowed && (
                                                     <p className="text-red-500 text-xs font-bold">
-                                                        Lunch RSVP is closed for today.
+                                                        Lunch RSVP is closed.
                                                     </p>
                                                 )}
                                             </FormItem>
@@ -254,7 +254,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                         className="flex flex-row space-x-4"
                                                         disabled={!dinnerAllowed}
                                                     >
-                                                        <FormItem className="flex items-center gap-3">
+                                                        <FormItem className="flex items-center gap-3 bg-green-300 p-2 rounded-full">
                                                             <FormControl>
                                                                 <RadioGroupItem value="true" />
                                                             </FormControl>
@@ -262,7 +262,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                                 Yes
                                                             </FormLabel>
                                                         </FormItem>
-                                                        <FormItem className="flex items-center gap-3">
+                                                        <FormItem className="flex items-center gap-3 bg-red-300 p-2 rounded-full">
                                                             <FormControl>
                                                                 <RadioGroupItem value="false" />
                                                             </FormControl>
@@ -275,7 +275,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                 <FormMessage />
                                                 {!dinnerAllowed && (
                                                     <p className="text-red-500 text-xs font-bold">
-                                                        Dinner RSVP is closed for today.
+                                                        Dinner RSVP is closed.
                                                     </p>
                                                 )}
                                             </FormItem>

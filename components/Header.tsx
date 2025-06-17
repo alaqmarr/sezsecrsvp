@@ -13,13 +13,13 @@ const Header = () => {
                 height={100}
                 className="mx-auto mb-4 rounded-md"
             />
-            <Image
+            {/* <Image
                 src="/logo.png"
                 alt="Shabab Ul Eidiz Zahabi"
                 width={100}
                 height={100}
                 className="mx-auto mb-4 rounded-md"
-            />
+            /> */}
 
         </div>
     )
