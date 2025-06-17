@@ -123,7 +123,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
             <Drawer>
                 <DrawerTrigger>
                     <Button variant="default" className="w-[100px] cursor-pointer">
-                        Mark RSVP
+                        Fill RSVP
                     </Button>
 
                 </DrawerTrigger>
