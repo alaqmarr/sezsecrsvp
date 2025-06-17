@@ -32,7 +32,7 @@ import { Card, CardContent } from './ui/card'
 
 const formSchema = z.object({
     name: z.string().min(1, "Name is required"),
-    number: z.string().min(1, "Number is required"),
+    number: z.string().min(10, "Mobile number must be at least 10 digits").max(10, "Mobile number must be at most 10 digits"),
     field: z.string().min(1, "Field is required"),
     deviceId: z.string().optional(), // Optional deviceId field
     lunch: z.boolean(),
@@ -162,7 +162,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                             <FormItem>
                                                 <FormLabel>Mobile Number</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder="9632587410" {...field} className='bg-green-100' />
+                                                    <Input placeholder="9632587410" {...field} className='bg-green-100' maxLength={10} minLength={10} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
