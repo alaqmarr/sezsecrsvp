@@ -205,7 +205,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                         control={form.control}
                                         name="lunch"
                                         render={({ field }) => (
-                                            <FormItem className="space-y-3">
+                                            <FormItem className={`space-y-3 ${!lunchAllowed ? 'hidden' : ''}`}>
                                                 <FormLabel>Lunch</FormLabel>
                                                 <FormControl>
                                                     <RadioGroup
@@ -245,7 +245,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                         control={form.control}
                                         name="dinner"
                                         render={({ field }) => (
-                                            <FormItem className="space-y-3">
+                                            <FormItem className={`space-y-3 ${!dinnerAllowed ? 'hidden' : ''}`}>
                                                 <FormLabel>Dinner</FormLabel>
                                                 <FormControl>
                                                     <RadioGroup

@@ -57,13 +57,17 @@ const Page = async () => {
         <Separator className='border-black bg-black' />
         <CardContent>
           <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <span>Lunch</span>
-              <span>{data.lunch ? "1:30PM - 2:30PM" : "No lunch RSVP"}</span>
-            </div>
+            {
+              data.lunch && (
+                <div className="flex items-center justify-between">
+                  <span>Lunch</span>
+                  <span>{data.lunch ? "1:30PM - 2:30PM" : "No lunch RSVP"}</span>
+                </div>
+              )
+            }
             <div className="flex items-center justify-between">
               <span>Dinner</span>
-              <span>{data.dinner ? "8:00PM - 9:00PM" : "No dinner RSVP"}</span>
+              <span>{data.dinner ? "8:00PM" : "No dinner RSVP"}</span>
             </div>
           </div>
         </CardContent>
