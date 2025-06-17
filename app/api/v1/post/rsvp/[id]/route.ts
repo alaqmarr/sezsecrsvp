@@ -30,51 +30,52 @@ export async function POST(
       },
     });
 
-    // Send WhatsApp message
-    const endpoint = "https://server.gallabox.com/devapi/messages/whatsapp";
-    const json = {
-      channelId: "684fc682a8649a3161213268",
-      channelType: "whatsapp",
-      recipient: {
-        name,
-        phone: "91" + number, // Ensure number is valid
-      },
-      whatsapp: {
-        type: "template",
-        template: {
-          templateName: "invite", // Fixed possible typo
-          bodyValues: {
-            name,
+    if (dinner) {
+      // Send WhatsApp message
+      const endpoint = "https://server.gallabox.com/devapi/messages/whatsapp";
+      const json = {
+        channelId: "684fc682a8649a3161213268",
+        channelType: "whatsapp",
+        recipient: {
+          name,
+          phone: "91" + number, // Ensure number is valid
+        },
+        whatsapp: {
+          type: "template",
+          template: {
+            templateName: "invite", // Fixed possible typo
+            bodyValues: {
+              name,
+            },
           },
         },
-      },
-    };
+      };
 
-    const res = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        apiKey: "685163b483fa2876fe4495fe",
-        apiSecret: "5540208648a74a22a631d784809d7e52",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(json),
-    });
-
-    if (!res.ok) {
-      const errorData = await res.json().catch(() => ({}));
-      console.error("Failed to send message:", errorData);
-      return NextResponse.json(
-        {
-          error: "Failed to send message",
-          details: errorData,
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          apiKey: "685163b483fa2876fe4495fe",
+          apiSecret: "5540208648a74a22a631d784809d7e52",
+          "Content-Type": "application/json",
         },
-        { status: res.status }
-      );
+        body: JSON.stringify(json),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        console.error("Failed to send message:", errorData);
+        return NextResponse.json(
+          {
+            error: "Failed to send message",
+            details: errorData,
+          },
+          { status: res.status }
+        );
+      }
+
+      const data = await res.json();
+      console.log("Message sent successfully:", data);
     }
-
-    const data = await res.json();
-    console.log("Message sent successfully:", data);
-
     return NextResponse.json(rsvp);
   } catch (error: any) {
     console.error("Server error:", error);
