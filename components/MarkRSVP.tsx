@@ -41,6 +41,8 @@ const formSchema = z.object({
 const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
     const [lunchAllowed, setLunchAllowed] = useState(true)
     const [dinnerAllowed, setDinnerAllowed] = useState(true)
+    const [success, setSuccess] = useState(false)
+    const [error, setError] = useState(false)
 
     // Set cut-off times for lunch and dinner
     //Lunch is 12:00PM and Dinner is 5:00PM
@@ -105,14 +107,17 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
             if (response.status === 200) {
                 toast.success("RSVP marked successfully!")
                 form.reset()
+                setSuccess(true)
                 setProcessing(false)
             } else {
                 toast.error("Failed to mark RSVP")
                 setProcessing(false)
+                setError(true)
             }
         } catch (error: any) {
             toast.error(error.message || "An error occurred while marking RSVP")
             console.error("Error marking RSVP:", error)
+            setError(true)
             setProcessing(false)
         }
     }
@@ -194,7 +199,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                         <SelectItem value="Flow Management">Flow Management</SelectItem>
                                                         <SelectItem value="Nazafat">Nazafat</SelectItem>
                                                         <SelectItem value="Fire Safety">Fire Safety</SelectItem>
-<SelectItem value="Medical">Medical</SelectItem>
+                                                        <SelectItem value="Medical">Medical</SelectItem>
 
                                                     </SelectContent>
                                                 </Select>
@@ -291,7 +296,19 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                             </p>
                                         )
                                             :
-                                            <Button type="submit" className='w-full mt-4'>Submit</Button>
+                                            success ? (
+                                                <p className='text-center text-green-500 font-semibold'>
+                                                    RSVP marked successfully!
+                                                </p>
+                                            ) : error ? (
+                                                <p className='text-center text-red-500 font-semibold'>
+                                                    Failed to mark RSVP. Please try again.
+                                                </p>
+                                            )
+                                                :
+                                                <Button type="submit" className="w-full bg-green-500 hover:bg-green-600 text-white">
+                                                    Submit RSVP
+                                                </Button>
                                     }
                                 </form>
                             </Form>
