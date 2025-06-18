@@ -194,6 +194,7 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                                                         <SelectItem value="Flow Management">Flow Management</SelectItem>
                                                         <SelectItem value="Nazafat">Nazafat</SelectItem>
                                                         <SelectItem value="Fire Safety">Fire Safety</SelectItem>
+<SelectItem value="Medical">Medical</SelectItem>
 
                                                     </SelectContent>
                                                 </Select>
