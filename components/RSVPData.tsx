@@ -23,6 +23,7 @@ import { Button } from './ui/button';
 import { XIcon } from 'lucide-react';
 import { Separator } from './ui/separator';
 import { toZonedTime } from 'date-fns-tz';
+import { TeamWiseView } from './UmoorWiseRsvp';
 
 export const revalidate = 1;
 
@@ -43,7 +44,6 @@ const RSVPData = async () => {
 
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {rsvps.map((rsvp: any) => {
-          // ✅ Filter unique entries by name + number
           const uniqueRsvps: RSVP[] = rsvp.rsvps?.filter(
             (r: RSVP, index: number, self: RSVP[]) =>
               self.findIndex(
@@ -77,10 +77,10 @@ const RSVPData = async () => {
                   <span>{dinnerCount} attending | {dinnerthaal} Thaals</span>
                 </div>
                 <Separator />
-                <div className='flex items-center justify-center w-full'>
+                <div className='flex items-center justify-center w-full gap-2 mt-4'>
                   <Drawer>
                     <DrawerTrigger>
-                      <Button variant="secondary" className="w-fit mt-4 cursor-pointer">
+                      <Button variant="secondary" className="w-fit cursor-pointer">
                         View Attendees
                       </Button>
                     </DrawerTrigger>
@@ -96,6 +96,7 @@ const RSVPData = async () => {
                             <TableRow>
                               <TableHead>S No</TableHead>
                               <TableHead>Name</TableHead>
+                              <TableHead>Team</TableHead>
                               <TableHead>Lunch</TableHead>
                               <TableHead>Dinner</TableHead>
                             </TableRow>
@@ -105,6 +106,7 @@ const RSVPData = async () => {
                               <TableRow key={r.id}>
                                 <TableCell className="font-medium">{index + 1}</TableCell>
                                 <TableCell>{r.name}</TableCell>
+                                <TableCell>{r.field || '-'}</TableCell>
                                 <TableCell>{r.lunch ? 'Yes' : 'No'}</TableCell>
                                 <TableCell>{r.dinner ? 'Yes' : 'No'}</TableCell>
                               </TableRow>
@@ -122,6 +124,8 @@ const RSVPData = async () => {
                       </DrawerFooter>
                     </DrawerContent>
                   </Drawer>
+
+                  <TeamWiseView rsvps={uniqueRsvps} />
                 </div>
               </CardContent>
             </Card>
