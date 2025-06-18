@@ -70,7 +70,7 @@ export const TeamWiseView = ({ rsvps }: TeamWiseViewProps) => {
     <Drawer>
       <DrawerTrigger asChild>
         <Button variant="outline" className="w-fit cursor-pointer">
-          View Team-wise Counts
+          Team Wise
         </Button>
       </DrawerTrigger>
 
