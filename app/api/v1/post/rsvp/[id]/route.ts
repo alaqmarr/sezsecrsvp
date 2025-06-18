@@ -64,13 +64,6 @@ export async function POST(
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
         console.error("Failed to send message:", errorData);
-        return NextResponse.json(
-          {
-            error: "Failed to send message",
-            details: errorData,
-          },
-          { status: res.status }
-        );
       }
 
       const data = await res.json();
