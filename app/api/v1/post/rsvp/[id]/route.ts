@@ -62,7 +62,7 @@ export async function POST(
       });
 
       if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
+        const errorData = await res.json();
         console.error("Failed to send message:", errorData);
       }
 
