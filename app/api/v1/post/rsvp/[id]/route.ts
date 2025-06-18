@@ -16,6 +16,20 @@ export async function POST(
       );
     }
 
+    const check = await prisma.rSVP.findFirst({
+      where: {
+        rsvpDayId: id,
+        number: number,
+      },
+    });
+
+    if (check) {
+      return NextResponse.json(
+        { error: "You have already submitted an RSVP" },
+        { status: 400 }
+      );
+    }
+
     // Create RSVP
     const rsvp = await prisma.rSVP.create({
       data: {
