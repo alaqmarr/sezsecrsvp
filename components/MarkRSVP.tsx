@@ -110,12 +110,12 @@ const MarkRSVP = ({ rsvpId }: { rsvpId: string }) => {
                 setSuccess(true)
                 setProcessing(false)
             } else {
-                toast.error("Failed to mark RSVP")
+                toast.error(response.data.error)
                 setProcessing(false)
                 setError(true)
             }
         } catch (error: any) {
-            toast.error(error.message || "An error occurred while marking RSVP")
+            toast.error(error.response?.data?.error || "Failed to mark RSVP or RSVP already exists")
             console.error("Error marking RSVP:", error)
             setError(true)
             setProcessing(false)

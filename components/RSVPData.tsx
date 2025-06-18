@@ -1,31 +1,40 @@
 import { RSVP } from '@/app/prisma';
-import prisma from '@/lib/db';
 import React from 'react';
 import { Card, CardContent, CardHeader } from './ui/card';
 import { format } from 'date-fns';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from './ui/drawer';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger
+} from './ui/drawer';
 import { Button } from './ui/button';
-import { CrossIcon, XCircleIcon, XIcon } from 'lucide-react';
+import { XIcon } from 'lucide-react';
 import { Separator } from './ui/separator';
 import { toZonedTime } from 'date-fns-tz';
 
-export const revalidate = 1;// Revalidate every 60 seconds
+export const revalidate = 1;
+
 const RSVPData = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/v1/get/data`, {
-    cache: 'no-store', // Disable caching for fresh data
+    cache: 'no-store',
   });
+
   if (!res.ok) {
     throw new Error('Failed to fetch RSVP data');
   }
+
   const rsvps = await res.json();
 
   return (
@@ -34,21 +43,26 @@ const RSVPData = async () => {
 
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {rsvps.map((rsvp: any) => {
-          const lunchCount = rsvp.rsvps?.filter((r: RSVP) => r.lunch).length || 0;
-          const dinnerCount = rsvp.rsvps?.filter((r: RSVP) => r.dinner).length || 0;
+          // ✅ Filter unique entries by name + number
+          const uniqueRsvps: RSVP[] = rsvp.rsvps?.filter(
+            (r: RSVP, index: number, self: RSVP[]) =>
+              self.findIndex(
+                (x: RSVP) =>
+                  x.name.trim().toLowerCase() === r.name.trim().toLowerCase() &&
+                  x.number.trim() === r.number.trim()
+              ) === index
+          ) || [];
+
+          const lunchCount = uniqueRsvps.filter((r) => r.lunch).length;
+          const dinnerCount = uniqueRsvps.filter((r) => r.dinner).length;
           const lunchthaal = lunchCount / 8;
           const dinnerthaal = dinnerCount / 8;
 
           return (
             <Card key={rsvp.id} className="shadow-md hover:shadow-lg transition duration-300">
-              <CardHeader
-                className='h-[20px]'
-              >
+              <CardHeader className='h-[20px]'>
                 <h2 className="text-lg font-medium text-gray-700">
-                  {format(
-                    toZonedTime(new Date(rsvp.date), 'Asia/Kolkata'),
-                    'PPP'
-                  )}
+                  {format(toZonedTime(new Date(rsvp.date), 'Asia/Kolkata'), 'PPP')}
                 </h2>
               </CardHeader>
               <Separator />
@@ -63,9 +77,7 @@ const RSVPData = async () => {
                   <span>{dinnerCount} attending | {dinnerthaal} Thaals</span>
                 </div>
                 <Separator />
-                <div
-                  className='flex items-center justify-center w-full'
-                >
+                <div className='flex items-center justify-center w-full'>
                   <Drawer>
                     <DrawerTrigger>
                       <Button variant="secondary" className="w-fit mt-4 cursor-pointer">
@@ -89,7 +101,7 @@ const RSVPData = async () => {
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            {rsvp.rsvps?.map((r: RSVP, index: number) => (
+                            {uniqueRsvps.map((r: RSVP, index: number) => (
                               <TableRow key={r.id}>
                                 <TableCell className="font-medium">{index + 1}</TableCell>
                                 <TableCell>{r.name}</TableCell>
@@ -103,14 +115,13 @@ const RSVPData = async () => {
 
                       <DrawerFooter className="mt-2">
                         <DrawerClose>
-                          <Button variant="destructive" className="w-fit">
-                            <XIcon /> <span>Close</span>
+                          <Button variant="destructive" className="w-fit flex items-center gap-1">
+                            <XIcon className="w-4 h-4" /> <span>Close</span>
                           </Button>
                         </DrawerClose>
                       </DrawerFooter>
                     </DrawerContent>
                   </Drawer>
-
                 </div>
               </CardContent>
             </Card>
