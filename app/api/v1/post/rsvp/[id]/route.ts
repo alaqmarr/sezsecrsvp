@@ -44,46 +44,7 @@ export async function POST(
     });
 
     // If dinner is selected, try to send WhatsApp message (optional but non-blocking)
-    if (dinner) {
-      try {
-        const endpoint = "https://server.gallabox.com/devapi/messages/whatsapp";
-        const json = {
-          channelId: "684fc682a8649a3161213268",
-          channelType: "whatsapp",
-          recipient: {
-            name,
-            phone: "91" + number,
-          },
-          whatsapp: {
-            type: "template",
-            template: {
-              templateName: "invite",
-              bodyValues: { name },
-            },
-          },
-        };
-
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: {
-            apiKey: "685163b483fa2876fe4495fe",
-            apiSecret: "5540208648a74a22a631d784809d7e52",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(json),
-        });
-
-        if (!res.ok) {
-          const errorData = await res.json();
-          console.error("WhatsApp message failed:", errorData);
-        } else {
-          const data = await res.json();
-          console.log("WhatsApp message sent:", data);
-        }
-      } catch (msgError) {
-        console.error("Error sending WhatsApp message:", msgError);
-      }
-    }
+    
 
     return NextResponse.json(rsvp);
   } catch (error: any) {
